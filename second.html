@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+      name="description"
+      content="Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Quas deserunt assumenda, sint adipisci nihil delectus, vero perspiciatis eveniet, 
+      eum nam sequi quidem magni eos tenetur architecto fugiat aut vel illum?"
+     >
+    <title>Тест</title>
+
+    <link rel="stylesheet" href="index.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body>
+    <form class="form">
+        <select class="form-select" name="Поле выбора 1">
+            <option selected>Выберите вариант</option>
+            <option value="1">Один</option>
+            <option value="2">Два</option>
+            <option value="3">Три</option>
+            <option value="4">Четыре</option>
+            <option value="5">Пять</option>
+        </select>
+
+        <select class="form-select" name="Поле выбора 2">
+            <option selected>Выберите вариант</option>
+            <option value="1">Один</option>
+            <option value="2">Два</option>
+            <option value="3">Три</option>
+            <option value="4">Четыре</option>
+            <option value="5">Пять</option>
+        </select>
+
+        <select class="form-select" name="Поле выбора 3">
+            <option selected>Выберите вариант</option>
+            <option value="1">Один</option>
+            <option value="2">Два</option>
+            <option value="3">Три</option>
+            <option value="4">Четыре</option>
+            <option value="5">Пять</option>
+        </select>
+
+        <select class="form-select" name="Поле выбора 4">
+            <option selected>Выберите вариант</option>
+            <option value="1">Один</option>
+            <option value="2">Два</option>
+            <option value="3">Три</option>
+            <option value="4">Четыре</option>
+            <option value="5">Пять</option>
+        </select>
+
+        <select class="form-select" name="Поле выбора 5">
+            <option selected>Выберите вариант</option>
+            <option value="1">Один</option>
+            <option value="2">Два</option>
+            <option value="3">Три</option>
+            <option value="4">Четыре</option>
+            <option value="5">Пять</option>
+        </select>
+
+        <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label">Поле ввода</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" name="Поле ввода" placeholder="Напишите что-нибудь">
+        </div>
+
+        <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label">Поле ввода</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" name="Поле ввода 2" placeholder="И здесь тоже">
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary" id="sendForm">Отправить данные</button>
+        </div>
+
+
+    </form>
+    <script src="js\code.jquery.com_jquery-3.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    
+    <script> 
+        const form = document.querySelector('.form');
+        const sendForm = document.querySelector('#sendForm');
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            xhr = new XMLHttpRequest();
+            xhr.open('GET','http://handler.php');
+            
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            const jsonData = JSON.stringify(data);
+
+            form.insertAdjacentHTML ('afterend', 
+            `<span>${jsonData}</span>`
+            )
+            xhr.send(jsonData);
+
+            xhr.onload = function() {
+                if (xhr.status == 200) {
+                    alert(`Данные успешно отправлены: ${xhr.status} ${xhr.response}`);
+                } else {
+                    alert(`Ошибка: ${xhr.status} ${xhr.response}`);
+                }
+            }
+        })
+    </script> 
+
+</body>
+</html>
